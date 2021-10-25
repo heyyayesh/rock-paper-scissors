@@ -51,6 +51,7 @@ p{
 
 .choice{
     width: 30%;
+    min-width: fit-content;
 }
 
 .choice, #restart{
@@ -66,6 +67,7 @@ p{
 #restart{
     width: fit-content;
     align-self: center;
+    margin-bottom: 30px;
 }
 
 .middle{
@@ -128,7 +130,7 @@ h1{
     justify-content: center;
     align-items: center;
     border-top: black solid 5px;
-    position: fixed;
+    position: relative;
     bottom: 0;
     width: 100%;
     gap: 12px;
