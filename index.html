@@ -5,40 +5,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <p>Play the classic game of Rock-Paper-Scissors against the computer by choosing 
+    <div class="header">
+        <p class="header-text">Rock Paper Scissors</p>
+    </div>
+
+    <div class="rules">
+        <p class="rules-text">Play the classic game of Rock-Paper-Scissors against the computer by choosing 
         your move from the buttons below. The first one to reach 5 points wins the game!
-    </p>
+        </p>
+    </div>
+
+    <div class="middle">
+        <div class="display">
+            <div class="display-left">        
+                <h1>YOU</h1>
+                <span id="p-display-img"></span>        
+            </div>
+    
+            <div class="display-right">
+                <h1>BOT</h1>
+                <span id="c-display-img"></span>
+            </div>
+        </div>
+
+        <div class="score-display">
+            <p id="pScore-display">0</p>
+            <p id="dash">-</p>
+            <p id="cScore-display">0</p>
+        </div>
+    </div>
 
     <div class="buttons">
-        <button class="choice" id="rock">Rock</button>
-        <button class="choice" id="paper">Paper</button>
-        <button class="choice" id="scissors">Scissors</button>
+        <button class="choice" id="rock" data-text="rock">Rock</button>
+        <button class="choice" id="paper" data-text="paper">Paper</button>
+        <button class="choice" id="scissors" data-text="scissors">Scissors</button>
     </div>
 
-    <div>
-        <p>You chose : </p>
-        <p id="playerChoice">None</p>
+    <p id="winner">Make your move!</p>
+
+    <button id="restart">Restart</button>
+
+    <div class="credits">
+        <p id="credits-txt">Copyrights © 2021</p>
+        <a style="text-decoration: underline; color: #fff3df; font-family: monospace; font-size: 15px; text-shadow: 1px 1px 5px black;" href="https://github.com/heyyayesh">@heyyayesh</a>
     </div>
-
-    <div>
-        <p>Computer chose : </p>
-        <p id="computerChoice">None</p>
-    </div>
-
-    <div class="result">
-        <p id="roundResult">You haven't played a round yet</p>
-    </div>
-
-    <div class="score">
-        <p id="score">You : 0 VS 0 : Computer</p>
-    </div>
-
-    <p id="winner">Winner : None</p>
-
-    <button id="reset">Reset</button>
 
     <script src="script.js"></script>
     

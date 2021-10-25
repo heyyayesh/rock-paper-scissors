@@ -3,14 +3,19 @@ let computerSelection;
 
 const buttons = document.querySelectorAll('.choice');
 
-const playerChoice = document.getElementById('playerChoice');
-const computerChoice = document.getElementById('computerChoice');
+// const playerChoice = document.getElementById('playerChoice');
+// const computerChoice = document.getElementById('computerChoice');
 
-const roundResult = document.getElementById('roundResult');
-const score = document.getElementById('score');
+let playerImg = document.getElementById('p-display-img');
+let computerImg = document.getElementById('c-display-img');
+
+// const roundResult = document.getElementById('roundResult');
+// const score = document.getElementById('score');
+let pScoreDisplay = document.getElementById('pScore-display');
+let cScoreDisplay = document.getElementById('cScore-display');
 
 const winner = document.getElementById('winner');
-const reset = document.getElementById('reset');
+const restart = document.getElementById('restart');
 
 let pScore = 0, cScore = 0;
 
@@ -22,30 +27,48 @@ function coumputerPlay(){
 
 buttons.forEach(button => button.addEventListener('click', function(e) {
 
-    playerSelection = e.target.textContent;
+    playerSelection = e.target.getAttribute('data-text');
     computerSelection = coumputerPlay();
 
-    playerChoice.textContent = playerSelection;
-    computerChoice.textContent = computerSelection;
 
-    roundResult.textContent = playRound(playerSelection, computerSelection);
-    score.textContent = `You : ${pScore} VS ${cScore} : Computer`;
+    playerImg.innerHTML = displayImg(playerSelection);
+    computerImg.innerHTML = displayImg(computerSelection);
+
+    winner.textContent = playRound(playerSelection, computerSelection);
+
+    pScoreDisplay.textContent = pScore;
+    cScoreDisplay.textContent = cScore;
 
     if(declareWinner()[0]){
-        if(declareWinner()[1] == 'p') winner.textContent = 'You win! Congratulations!';
-        else if(declareWinner()[1] == 'c') winner.textContent = 'The mighty computer wins. Better luch next time!';
+        if(declareWinner()[1] == 'p'){
+            winner.textContent = 'You Win!';
+        }
+        else if(declareWinner()[1] == 'c'){
+            winner.textContent = 'You Lose!';
+        }
     }
 }));  
 
-reset.addEventListener('click', () => {
+restart.addEventListener('click', () => {
     pScore = 0, cScore = 0;
-    playerChoice.textContent = 'None';
-    computerChoice.textContent = 'None';
-    roundResult.textContent = 'You haven\'t played a round yet';
-    roundResult.style.backgroundColor = 'white';
-    score.textContent = `You : 0 VS 0 : Computer`;
-    winner.textContent = 'Winner : None';
+    winner.textContent = 'Make your move!';
+    pScoreDisplay.textContent = '0';
+    cScoreDisplay.textContent = '0';
+    playerImg.innerHTML = '';
+    computerImg.innerHTML = '';
 });
+
+function displayImg(selection){
+    if(selection.toUpperCase() == 'ROCK'){
+        return '<img src="img/rock.png" width=150px height=150px alt="Your choice">';
+    }
+    else if(selection.toUpperCase() == 'PAPER'){
+        return '<img src="img/paper.png" width=150px height=150px alt="Your choice"></img>';
+    }
+    else if(selection.toUpperCase() == 'SCISSORS'){
+        return '<img src="img/scissors.png" width=150px height=150px alt="Your choice">';
+    }
+}
 
 function declareWinner(){
     let w;
@@ -59,37 +82,30 @@ function declareWinner(){
 function playRound(p, c){
 
     if(p.toUpperCase() === c.toUpperCase()){
-        roundResult.style.backgroundColor = 'yellow';
         return 'Tie!';
     }
     else if(p.toUpperCase() === 'ROCK' && c.toUpperCase() === 'PAPER'){
         cScore++;
-        roundResult.style.backgroundColor = 'red';
         return 'Paper beats Rock!';
     }
     else if(p.toUpperCase() === 'ROCK' && c.toUpperCase() === 'SCISSORS'){
         pScore++;
-        roundResult.style.backgroundColor = 'lime';
         return 'Rock beats Scissors!';
     }
     else if(p.toUpperCase() === 'PAPER' && c.toUpperCase() === 'ROCK'){
         pScore++;
-        roundResult.style.backgroundColor = 'lime';
         return 'Paper beats Rock!';
     }
     else if(p.toUpperCase() === 'PAPER' && c.toUpperCase() === 'SCISSORS'){
         cScore++;
-        roundResult.style.backgroundColor = 'red';
         return 'Scissors beat Paper!';
     }
     else if(p.toUpperCase() === 'SCISSORS' && c.toUpperCase() === 'ROCK'){
         cScore++;
-        roundResult.style.backgroundColor = 'red';
         return 'Rock beats Scissors!';
     }
     else if(p.toUpperCase() === 'SCISSORS' && c.toUpperCase() === 'PAPER'){
         pScore++;
-        roundResult.style.backgroundColor = 'lime';
         return 'Scissors beat Paper!';
     }
     else{
